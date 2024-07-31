@@ -15,6 +15,18 @@ public class LoginPage extends BasePage {
     @FindBy(css = "button#submit-login")
     private WebElement submitLogin;
 
+    @FindBy(linkText = "Sign out")
+    private WebElement loggedIn;
+
+    @FindBy(linkText = "Sign in")
+    private WebElement loggedOut;
+
+    @FindBy(xpath = "//div[@id='_desktop_user_info']//a[@href='http://192.168.68.112/?mylogout=']")
+    private WebElement logOutButton;
+
+    @FindBy(css = "[title] .hidden-sm-down")
+    private WebElement myUserName;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -32,5 +44,21 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         submitLogin.click();
     }
+    String loggedIn() {
+        return loggedIn.getText();
+    }
+    String loggedout() {
+        return loggedOut.getText();
+    }
+
+    void logOut() {
+        logOutButton.click();
+    }
+
+    String myUserName() {
+        return myUserName.getText();
+    }
+
+
 
 }

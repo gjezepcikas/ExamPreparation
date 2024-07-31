@@ -30,7 +30,7 @@ public class RandomDataGenerator {
     }
 
     public static String getRandomPassword() {
-        int length = 8 + random.nextInt(9); // Password length between 8 and 16
+        int length = 10 + random.nextInt(9); // Password length between 8 and 16
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
         StringBuilder password = new StringBuilder(length);
         for (int i = 0; i < length; i++) {

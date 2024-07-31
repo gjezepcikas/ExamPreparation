@@ -1,10 +1,10 @@
 package lt.techin;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class RegistrationTest extends BaseTest {
+
+
 
 
     @Test
@@ -24,24 +24,25 @@ public class RegistrationTest extends BaseTest {
 
         String firstName = RandomDataGenerator.getRandomFirstName();
         String lastName = RandomDataGenerator.getRandomLastName();
-        String generatedEmail = RandomDataGenerator.getRandomEmail(firstName, lastName);
-        String generatedPassword = RandomDataGenerator.getRandomPassword();
+        String email = RandomDataGenerator.getRandomEmail(firstName, lastName);
+        String password = RandomDataGenerator.getRandomPassword();
         String birthDate = RandomDataGenerator.getRandomBirthDate();
 
         // Store the email and password in the properties file
-        ConfigUtility.setProperty("email", generatedEmail);
-        ConfigUtility.setProperty("password", generatedPassword);
+        ConfigUtility.setProperty("firstName", firstName);
+        ConfigUtility.setProperty("lastName", lastName);
+        ConfigUtility.setProperty("email", email);
+        ConfigUtility.setProperty("password", password);
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
         registrationPage.clickSignIn();
         registrationPage.clickCreateAccount();
-
         registrationPage.socialTitle();
         registrationPage.inputFirstName(firstName);
         registrationPage.inputLastName(lastName);
-        registrationPage.inputEmail(generatedEmail);
-        registrationPage.inputPassword(generatedPassword);
+        registrationPage.inputEmail(email);
+        registrationPage.inputPassword(password);
         registrationPage.inputBirthDate(birthDate);
         registrationPage.clickCheckBoxPrivacy();
         registrationPage.clickCheckBoxAgreeTerms();
