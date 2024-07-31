@@ -44,7 +44,7 @@ public class RegistrationPage extends BasePage{
         super(driver);
     }
 
-    void clickSignIn() {
+    public void clickSignIn() {
         clickSignInButton.click();
     }
 

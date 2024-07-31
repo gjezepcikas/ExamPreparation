@@ -10,10 +10,10 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
         driver = new ChromeDriver(options);
@@ -24,7 +24,9 @@ public class BaseTest {
 
     @AfterEach
     void tearDown() {
-//        driver.quit();
+        if (driver != null) {
+//            driver.quit();
+        }
     }
 
 
