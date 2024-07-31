@@ -3,11 +3,8 @@ package lt.techin;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegistrationTest extends BaseTest {
-    public static String generatedEmail;
-    public static String generatedPassword;
 
 
     @Test

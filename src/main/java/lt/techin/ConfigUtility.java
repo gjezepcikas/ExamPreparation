@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class ConfigUtility {
     private static final String CONFIG_FILE = "src/test/resources/config.properties";
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     static {
         try (InputStream input = new FileInputStream(CONFIG_FILE)) {
