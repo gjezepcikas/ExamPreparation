@@ -20,5 +20,21 @@ public class RegistrationTest extends BaseTest{
 
     }
 
+    @Test
+    void createAccountTest() {
+
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickSignIn();
+        registrationPage.clickCreateAccount();
+
+        registrationPage.socialTitle();
+
+
+
+
+
+
+    }
+
 
 }
