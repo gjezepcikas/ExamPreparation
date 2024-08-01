@@ -1,4 +1,4 @@
-package lt.techin;
+package lt.techin.gjezepcikas;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,15 +29,9 @@ public class LoginTest extends BaseTest {
 
         assertEquals("Sign out", loginPage.loggedIn());
         assertEquals("PrestaShop", registrationPage.getTitle());
-
-        String expectedName = firstName + " " + lastName;
-        assertEquals(expectedName, loginPage.myUserName(), "Name does not match");
-
-
-
+        assertEquals(firstName + " " + lastName, loginPage.myUserName(), "Name does not match");
 
         loginPage.logOut();
-
 
         assertEquals("Sign in", loginPage.loggedout());
 

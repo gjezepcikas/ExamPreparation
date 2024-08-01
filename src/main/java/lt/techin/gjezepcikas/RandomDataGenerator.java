@@ -1,4 +1,4 @@
-package lt.techin;
+package lt.techin.gjezepcikas;
 
 import java.util.Random;
 import java.time.LocalDate;
@@ -46,4 +46,18 @@ public class RandomDataGenerator {
         LocalDate birthDate = LocalDate.of(year, month, day);
         return birthDate.format(dateFormatter);
     }
+
+    public static String getRandomItem() {
+        String[] randomItems = {"Hummingbird printed t-shirt", "Hummingbird printed sweater", "The best is yet to come' Framed poster",
+                "The adventure begins Framed poster", "Today is a good day Framed poster", "Mug The best is yet to come", "Brown bear cushion",
+                "Mountain fox - Vector graphics", "Hummingbird cushion"};
+        return randomItems[random.nextInt(randomItems.length)];
+    }
+
+    public static String getWrongRandomItem() {
+        String[] wrongRandomItems = {"aaaaaab", "RedBull", "Beer", "dsfsfd"};
+        return wrongRandomItems[random.nextInt(wrongRandomItems.length)];
+    }
+
 }
+

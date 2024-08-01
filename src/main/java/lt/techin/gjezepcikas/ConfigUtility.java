@@ -1,4 +1,4 @@
-package lt.techin;
+package lt.techin.gjezepcikas;
 
 import java.io.*;
 import java.util.Properties;
