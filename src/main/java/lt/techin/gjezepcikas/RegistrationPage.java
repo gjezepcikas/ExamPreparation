@@ -9,7 +9,7 @@ public class RegistrationPage extends BasePage{
     @FindBy(css = ".user-info .hidden-sm-down")
     private WebElement clickSignInButton;
 
-    @FindBy(xpath = "//div[@id='content']//a[@href='http://192.168.68.112/registration']")
+    @FindBy(css = "[data-link-action='display-register-form']")
     private WebElement clickCreateAccountButton;
 
     @FindBy(css = "label:nth-of-type(1)  input[name='id_gender']")

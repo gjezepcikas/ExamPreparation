@@ -21,7 +21,7 @@ public class LoginPage extends BasePage {
     @FindBy(linkText = "Sign in")
     private WebElement loggedOut;
 
-    @FindBy(xpath = "//div[@id='_desktop_user_info']//a[@href='http://192.168.68.112/?mylogout=']")
+    @FindBy(css = ".user-info [rel='nofollow']:nth-of-type(1)")
     private WebElement logOutButton;
 
     @FindBy(css = "[title] .hidden-sm-down")

@@ -29,6 +29,7 @@ public class RandomDataGenerator {
         return firstName.toLowerCase() + "." + lastName.toLowerCase() + "@" + domains[random.nextInt(domains.length)];
     }
 
+
     public static String getRandomPassword() {
         int length = 10 + random.nextInt(9); // Password length between 8 and 16
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
@@ -38,6 +39,7 @@ public class RandomDataGenerator {
         }
         return password.toString();
     }
+
 
     public static String getRandomBirthDate() {
         int year = 1950 + random.nextInt(51); // Random year between 1950 and 2000
@@ -53,11 +55,5 @@ public class RandomDataGenerator {
                 "Mountain fox - Vector graphics", "Hummingbird cushion"};
         return randomItems[random.nextInt(randomItems.length)];
     }
-
-    public static String getWrongRandomItem() {
-        String[] wrongRandomItems = {"aaaaaab", "RedBull", "Beer", "dsfsfd"};
-        return wrongRandomItems[random.nextInt(wrongRandomItems.length)];
-    }
-
 }
 

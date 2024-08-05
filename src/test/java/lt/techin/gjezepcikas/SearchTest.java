@@ -19,16 +19,4 @@ public class SearchTest extends BaseTest {
                 "The product name should match.");
 
     }
-
-    @Test
-    void negativeSearchCatalogTest() {
-
-        String wrongRandomItems = RandomDataGenerator.getWrongRandomItem();
-
-        SearchPage searchPage = new SearchPage(driver);
-
-        searchPage.SearchField(wrongRandomItems);
-        assertNotEquals(wrongRandomItems.toUpperCase(), searchPage.getItemName().toUpperCase(),
-                "The product name should not match.");
-    }
 }

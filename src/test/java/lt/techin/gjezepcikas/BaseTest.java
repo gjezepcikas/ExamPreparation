@@ -19,7 +19,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
 //        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("http://192.168.68.112");
+        driver.get("http://192.168.89.54");
     }
 
     @AfterEach

@@ -9,7 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ArtPage extends BasePage {
 
-    @FindBy(xpath = "//ul[@id='top-menu']//a[@href='http://192.168.68.112/9-art']")
+
+    //Filter By
+
+    @FindBy(css = "li:nth-of-type(3) > .dropdown-item")
     private WebElement clickArtPage;
 
     @FindBy(css = "section:nth-of-type(1) > .collapse .custom-checkbox")
@@ -57,6 +60,32 @@ public class ArtPage extends BasePage {
     @FindBy(css = "li:nth-of-type(3) > .facet-label > .custom-checkbox")
     private WebElement dimensionThirdSelection;
 
+    //Sort by
+
+    @FindBy(css = ".btn-unstyle.select-title")
+    private WebElement sortByButton;
+
+    @FindBy(css = ".dropdown-menu > a:nth-of-type(1)")
+    private WebElement salesHighestToLowest;
+
+    @FindBy(linkText = "Name, A to Z")
+    private WebElement sortByNameAz;
+
+    @FindBy(linkText = "Name, Z to A")
+    private WebElement sortByNameZa;
+
+    @FindBy(css = ".dropdown-menu .js-search-link:nth-of-type(5)")
+    private WebElement sortByPriceLowToHigh;
+
+    @FindBy(css = ".dropdown-menu .js-search-link:nth-of-type(6)")
+    private WebElement sortByPriceHighToLow;
+
+    @FindBy(css = ".dropdown-menu .js-search-link:nth-of-type(7)")
+    private WebElement sortByReferenceAtoZ;
+
+    @FindBy(css = ".dropdown-menu .js-search-link:nth-of-type(8)")
+    private WebElement sortByReferenceZtoA;
+
 
     public ArtPage(WebDriver driver) {
         super(driver);
@@ -73,6 +102,7 @@ public class ArtPage extends BasePage {
         actions.dragAndDropBy(sliderHandle, xOffset, 0).perform();
     }
 
+    // Filter By
 
     void clickArtPageButton() {
         clickArtPage.click();
@@ -125,4 +155,38 @@ public class ArtPage extends BasePage {
     public void clickDimensionThirdSelection() {
         wait.until(ExpectedConditions.elementToBeClickable(dimensionThirdSelection)).click();
     }
+
+    // Sort By
+
+    void clickSortByButton() {
+        sortByButton.click();
+    }
+    void clickSalesHighestToLowest() {
+        salesHighestToLowest.click();
+    }
+
+    void clickSortByNameAz() {
+        sortByNameAz.click();
+    }
+
+    void clickSortByNameZa() {
+        sortByNameZa.click();
+    }
+
+    void clickSortByPriceLowToHigh() {
+        sortByPriceLowToHigh.click();
+    }
+
+    void clickSortByPriceHighToLow() {
+        sortByPriceHighToLow.click();
+    }
+
+    void clickSortByReferenceAtoZ() {
+        sortByReferenceAtoZ.click();
+    }
+
+    void clickSortByReferenceZtoA() {
+        sortByReferenceZtoA.click();
+    }
+
 }

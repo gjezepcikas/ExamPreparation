@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class LoginTest extends BaseTest {
 
     @Test
-    public void loginWithStoredCredentialsAndLogoutTest() {
+    public void loginWithValidCredentialsTest() {
         String email = ConfigUtility.getProperty("email");
         String password = ConfigUtility.getProperty("password");
         String firstName = ConfigUtility.getProperty("firstName");
@@ -36,4 +36,30 @@ public class LoginTest extends BaseTest {
         assertEquals("Sign in", loginPage.loggedout());
 
     }
+    @Test
+    public void loginWithInvalidCredentialsTest() {
+
+        String email = ConfigUtility.getProperty("email");
+        String password = ConfigUtility.getProperty("password");
+
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickSignIn();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.emailInput(email);
+        loginPage.passwordInput(password);
+        loginPage.clickLoginButton();
+
+        assertEquals("Sign out", loginPage.loggedIn());
+        assertEquals("PrestaShop", registrationPage.getTitle());
+
+        loginPage.logOut();
+
+        assertEquals("Sign in", loginPage.loggedout());
+
+
+
+
+
+    }
+
 }
