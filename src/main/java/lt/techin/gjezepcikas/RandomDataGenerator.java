@@ -48,8 +48,8 @@ public class RandomDataGenerator {
     }
 
     public static String getRandomItem() {
-        String[] randomItems = {"Hummingbird printed t-shirt", "Hummingbird printed sweater", "The best is yet to come' Framed poster",
-                "The adventure begins Framed poster", "Today is a good day Framed poster", "Mug The best is yet to come", "Brown bear cushion",
+        String[] randomItems = {"Hummingbird printed t-shirt", "Hummingbird printed sweater",
+                "The adventure begins Framed", "Mug The best is yet to come", "Brown bear cushion",
                 "Mountain fox - Vector graphics", "Hummingbird cushion"};
         return randomItems[random.nextInt(randomItems.length)];
     }

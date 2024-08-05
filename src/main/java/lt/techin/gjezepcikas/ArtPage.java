@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 public class ArtPage extends BasePage {
 
     @FindBy(xpath = "//ul[@id='top-menu']//a[@href='http://192.168.68.112/9-art']")
