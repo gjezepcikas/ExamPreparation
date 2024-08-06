@@ -1,10 +1,14 @@
 package lt.techin.gjezepcikas;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ArtPage extends BasePage {
@@ -41,6 +45,7 @@ public class ArtPage extends BasePage {
 
     @FindBy(css = ".filter-block")
     private WebElement sliderValueDisplay;
+
 
     @FindBy(css = "section:nth-of-type(4) > .collapse .custom-checkbox")
     private WebElement compositionCheckBox;
@@ -101,6 +106,17 @@ public class ArtPage extends BasePage {
         Actions actions = new Actions(driver);
         actions.dragAndDropBy(sliderHandle, xOffset, 0).perform();
     }
+        // Compares prices in Slider assertion
+    public List<Double> getDisplayedItemPrices() {
+        List<WebElement> priceElements = driver.findElements(By.cssSelector(".price-class-selector")); // Replace with the actual selector
+        List<Double> prices = new ArrayList<>();
+        for (WebElement element : priceElements) {
+            String priceText = element.getText().replace("$", "").trim();
+            prices.add(Double.parseDouble(priceText));
+        }
+        return prices;
+    }
+
 
     // Filter By
 
@@ -120,11 +136,11 @@ public class ArtPage extends BasePage {
         return Integer.parseInt(artInStock.getText().replaceAll("\\D+", ""));
     }
 
-    void closeSelection() {
+    public void closeSelection() {
         closeSelection.click();
     }
 
-    void clickNewProduct() {
+    public void clickNewProduct() {
         newProduct.click();
     }
 
@@ -132,7 +148,7 @@ public class ArtPage extends BasePage {
         return Integer.parseInt(selectionsNewProductCount.getText().replaceAll("\\D+", ""));
     }
 
-    void clickCompositionCheckBox() {
+    public void clickCompositionCheckBox() {
         compositionCheckBox.click();
     }
 
@@ -140,7 +156,7 @@ public class ArtPage extends BasePage {
         return Integer.parseInt(artInStock.getText().replaceAll("\\D+", ""));
     }
 
-    void clickBrandSelection() {
+    public void clickBrandSelection() {
         brandSelection.click();
     }
 
@@ -161,6 +177,7 @@ public class ArtPage extends BasePage {
     void clickSortByButton() {
         sortByButton.click();
     }
+
     void clickSalesHighestToLowest() {
         salesHighestToLowest.click();
     }

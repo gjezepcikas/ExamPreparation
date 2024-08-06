@@ -1,5 +1,6 @@
 package lt.techin.gjezepcikas;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -10,34 +11,43 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class RegistrationTest extends BaseTest {
 
 
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String birthDate;
 
+    @BeforeEach
+    void startUp() {
 
-    @Test
-    void clickOnSignInAndClickCreateAccountTest() {
-
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.clickSignIn();
-
-        assertEquals("Login", registrationPage.getTitle());
-
-        registrationPage.clickCreateAccount();
-        assertEquals("Registration", registrationPage.getTitle());
-    }
-
-    @Test
-    void createAccountTest() {
-
-        String firstName = RandomDataGenerator.getRandomFirstName();
-        String lastName = RandomDataGenerator.getRandomLastName();
-        String email = RandomDataGenerator.getRandomEmail(firstName, lastName);
-        String password = RandomDataGenerator.getRandomPassword();
-        String birthDate = RandomDataGenerator.getRandomBirthDate();
+        firstName = RandomDataGenerator.getRandomFirstName();
+        lastName = RandomDataGenerator.getRandomLastName();
+        email = RandomDataGenerator.getRandomEmail(firstName, lastName);
+        password = RandomDataGenerator.getRandomPassword();
+        birthDate = RandomDataGenerator.getRandomBirthDate();
 
         // Store the email and password in the properties file
         ConfigUtility.setProperty("firstName", firstName);
         ConfigUtility.setProperty("lastName", lastName);
         ConfigUtility.setProperty("email", email);
         ConfigUtility.setProperty("password", password);
+    }
+
+
+    @Test
+    void clickOnSignInAndAccountTest() {
+
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickSignIn();
+
+        assertEquals("Login", registrationPage.getTitle(), "Sign-in page title mismatch");
+
+        registrationPage.clickCreateAccount();
+        assertEquals("Registration", registrationPage.getTitle(), "Registration page title mismatch");
+    }
+
+    @Test
+    void createAccountTest() {
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
@@ -54,23 +64,17 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickSaveButton();
 
         // Assertions
-        String expectedUrl = "http://192.168.89.54/";
+        String expectedUrl = "http://192.168.68.112/";
         String actualUrl = driver.getCurrentUrl();
-        assertEquals(expectedUrl, actualUrl);
-        assertEquals("PrestaShop", registrationPage.getTitle());
+        assertEquals(expectedUrl, actualUrl, "Current URL does not match expected URL");
+        assertEquals("PrestaShop", registrationPage.getTitle(), "Page title does not match 'PrestaShop'");
     }
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/invalid_first_name_values.csv", numLinesToSkip = 1)
     void registerWithInvalidFirstName(String firstName) {
+
         LoginPage loginPage = new LoginPage(driver);
-
-
-        String lastName = RandomDataGenerator.getRandomLastName();
-        String email = RandomDataGenerator.getRandomEmail(firstName, lastName);
-        String password = RandomDataGenerator.getRandomPassword();
-        String birthDate = RandomDataGenerator.getRandomBirthDate();
-
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
@@ -87,8 +91,8 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickSaveButton();
 
         // Verify user is not logged in
-        assertNotEquals(firstName + " " + RandomDataGenerator.getRandomLastName(), loginPage.myUserName(), "Name does not match");
-        assertEquals("http://192.168.89.54/registration", driver.getCurrentUrl(), "Web addresses not match");
+        assertNotEquals(firstName + " " + RandomDataGenerator.getRandomLastName(), loginPage.myUserName(), "Name matches when it shouldn't");
+        assertEquals("http://192.168.68.112/registration", driver.getCurrentUrl(), "Current URL does not match expected URL");
     }
 
     @ParameterizedTest
@@ -96,12 +100,6 @@ public class RegistrationTest extends BaseTest {
     void registerWithInvalidLastName(String lastName) {
         LoginPage loginPage = new LoginPage(driver);
 
-        String firstName = RandomDataGenerator.getRandomFirstName();
-        String email = RandomDataGenerator.getRandomEmail(firstName, lastName);
-        String password = RandomDataGenerator.getRandomPassword();
-        String birthDate = RandomDataGenerator.getRandomBirthDate();
-
-
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
         registrationPage.clickSignIn();
@@ -117,8 +115,8 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickSaveButton();
 
         // Verify user is not logged in
-        assertNotEquals(RandomDataGenerator.getRandomFirstName() + " " + lastName, loginPage.myUserName(), "Name does not match");
-//        assertEquals("http://192.168.89.54/registration", driver.getCurrentUrl(), "Web addresses not match");
+        assertNotEquals(RandomDataGenerator.getRandomFirstName() + " " + lastName, loginPage.myUserName(), "Name matches when it shouldn't");
+        assertEquals("http://192.168.68.112/registration", driver.getCurrentUrl(), "Current URL does not match expected URL");
     }
 
 
@@ -127,11 +125,6 @@ public class RegistrationTest extends BaseTest {
     void registerUsingBadPassword(String password) {
         LoginPage loginPage = new LoginPage(driver);
 
-        String firstName = RandomDataGenerator.getRandomFirstName();
-        String lastName = RandomDataGenerator.getRandomLastName();
-        String email = RandomDataGenerator.getRandomEmail(firstName, lastName);
-        String birthDate = RandomDataGenerator.getRandomBirthDate();
-
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
         registrationPage.clickSignIn();
@@ -147,8 +140,8 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickSaveButton();
 
         // Verify user is not logged in
-        assertNotEquals(RandomDataGenerator.getRandomFirstName() + " " + RandomDataGenerator.getRandomLastName(), loginPage.myUserName(), "Name does not match");
-        assertEquals("http://192.168.89.54/registration", driver.getCurrentUrl(), "Web addresses not match");
+        assertNotEquals(RandomDataGenerator.getRandomFirstName() + " " + RandomDataGenerator.getRandomLastName(), loginPage.myUserName(), "Name matches when it shouldn't");
+        assertEquals("http://192.168.68.112/registration", driver.getCurrentUrl(), "Current URL does not match expected URL");
     }
 
     @ParameterizedTest
@@ -156,11 +149,6 @@ public class RegistrationTest extends BaseTest {
     void registerWithInvalidEmail(String email) {
         LoginPage loginPage = new LoginPage(driver);
 
-        String firstName = RandomDataGenerator.getRandomFirstName();
-        String lastName = RandomDataGenerator.getRandomLastName();
-        String password = RandomDataGenerator.getRandomPassword();
-        String birthDate = RandomDataGenerator.getRandomBirthDate();
-
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
         registrationPage.clickSignIn();
@@ -176,8 +164,8 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickSaveButton();
 
         // Verify user is not logged in
-        assertNotEquals(RandomDataGenerator.getRandomFirstName() + " " + RandomDataGenerator.getRandomLastName(), loginPage.myUserName(), "Name does not match");
-        assertEquals("http://192.168.89.54/registration", driver.getCurrentUrl(), "Web addresses not match");
+        assertNotEquals(RandomDataGenerator.getRandomFirstName() + " " + RandomDataGenerator.getRandomLastName(), loginPage.myUserName(), "Name matches when it shouldn't");
+        assertEquals("http://192.168.68.112/registration", driver.getCurrentUrl(), "Current URL does not match expected URL");
     }
 
 

@@ -1,8 +1,10 @@
 package lt.techin.gjezepcikas;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTest extends BaseTest {
 
@@ -28,7 +30,7 @@ public class LoginTest extends BaseTest {
         loginPage.clickLoginButton();
 
         assertEquals("Sign out", loginPage.loggedIn());
-        assertEquals("PrestaShop", registrationPage.getTitle());
+        assertEquals("PrestaShop", registrationPage.getTitle(), "Login page title mismatch");
         assertEquals(firstName + " " + lastName, loginPage.myUserName(), "Name does not match");
 
         loginPage.logOut();
@@ -36,30 +38,42 @@ public class LoginTest extends BaseTest {
         assertEquals("Sign in", loginPage.loggedout());
 
     }
-    @Test
-    public void loginWithInvalidCredentialsTest() {
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/invalid_email_values.csv", numLinesToSkip = 1)
+    void loginWithInvalidEmail(String email) {
 
-        String email = ConfigUtility.getProperty("email");
         String password = ConfigUtility.getProperty("password");
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
+
         registrationPage.clickSignIn();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.emailInput(email);
         loginPage.passwordInput(password);
         loginPage.clickLoginButton();
 
-        assertEquals("Sign out", loginPage.loggedIn());
-        assertEquals("PrestaShop", registrationPage.getTitle());
+        // Verify user is not logged in
+        assertEquals("Login", loginPage.getTitle(), "Login page title mismatch");
+        assertEquals("http://192.168.68.112/login?back=http%3A%2F%2F192.168.68.112%2F", driver.getCurrentUrl(), "Current URL does not match expected URL");
+    }
 
-        loginPage.logOut();
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/invalid password.csv", numLinesToSkip = 1)
+    void loginWithInvalidPassword(String password) {
 
-        assertEquals("Sign in", loginPage.loggedout());
+        String email = ConfigUtility.getProperty("email");
 
+        RegistrationPage registrationPage = new RegistrationPage(driver);
 
+        registrationPage.clickSignIn();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.emailInput(email);
+        loginPage.passwordInput(password);
+        loginPage.clickLoginButton();
 
-
-
+        // Verify user is not logged in
+        assertEquals("Login", loginPage.getTitle(), "Login page title mismatch");
+        assertEquals("http://192.168.68.112/login?back=http%3A%2F%2F192.168.68.112%2F", driver.getCurrentUrl(), "Current URL does not match expected URL");
     }
 
 }

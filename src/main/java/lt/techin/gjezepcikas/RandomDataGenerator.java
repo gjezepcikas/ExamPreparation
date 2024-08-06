@@ -32,7 +32,7 @@ public class RandomDataGenerator {
 
     public static String getRandomPassword() {
         int length = 10 + random.nextInt(9); // Password length between 8 and 16
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkl56789@#$%+";
         StringBuilder password = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             password.append(characters.charAt(random.nextInt(characters.length())));
