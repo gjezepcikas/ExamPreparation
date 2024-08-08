@@ -18,8 +18,11 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp() {
+
+        //Disable search engine choices and headless start
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
 //        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

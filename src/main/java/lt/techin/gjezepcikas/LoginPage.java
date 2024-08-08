@@ -44,9 +44,11 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         submitLogin.click();
     }
+
     String loggedIn() {
         return loggedIn.getText();
     }
+
     String loggedout() {
         return loggedOut.getText();
     }
@@ -58,7 +60,6 @@ public class LoginPage extends BasePage {
     String myUserName() {
         return myUserName.getText();
     }
-
 
 
 }
