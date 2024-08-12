@@ -91,6 +91,14 @@ public class ArtPage extends BasePage {
     @FindBy(css = ".dropdown-menu .js-search-link:nth-of-type(8)")
     private WebElement sortByReferenceZtoA;
 
+    //Wishlist
+    @FindBy(css = ".wishlist-button-add")
+    private WebElement wishlistButton;
+
+    @FindBy(css = ".wishlist-list  p")
+    private  WebElement chooseWishlist;
+
+
 
     public ArtPage(WebDriver driver) {
         super(driver);
@@ -106,7 +114,8 @@ public class ArtPage extends BasePage {
         Actions actions = new Actions(driver);
         actions.dragAndDropBy(sliderHandle, xOffset, 0).perform();
     }
-        // Compares prices in Slider assertion
+
+    // Compares prices in Slider assertion
     public List<Double> getDisplayedItemPrices() {
         List<WebElement> priceElements = driver.findElements(By.cssSelector(".price-class-selector")); // Replace with the actual selector
         List<Double> prices = new ArrayList<>();
@@ -204,6 +213,24 @@ public class ArtPage extends BasePage {
 
     void clickSortByReferenceZtoA() {
         sortByReferenceZtoA.click();
+    }
+
+    //Wishlist
+
+    void clickWishlistButton() {
+        wishlistButton.click();
+
+    }
+    void chooseChecklist() {
+        chooseWishlist.click();
+    }
+
+    public String successMessageWishlist() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".wishlist-toast-text"))).getText();
+    }
+
+    public String successMessageRemoveFromWishlist() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".success.wishlist-toast > .wishlist-toast-text"))).getText();
     }
 
 }

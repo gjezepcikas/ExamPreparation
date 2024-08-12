@@ -1,6 +1,5 @@
 package lt.techin.gjezepcikas;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -11,28 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class RegistrationTest extends BaseTest {
 
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String birthDate;
-
-    @BeforeEach
-    void startUp() {
-
-        firstName = RandomDataGenerator.getRandomFirstName();
-        lastName = RandomDataGenerator.getRandomLastName();
-        email = RandomDataGenerator.getRandomEmail(firstName, lastName);
-        password = RandomDataGenerator.getRandomPassword();
-        birthDate = RandomDataGenerator.getRandomBirthDate();
-
-        // Store the email and password in the properties file
-        ConfigUtility.setProperty("firstName", firstName);
-        ConfigUtility.setProperty("lastName", lastName);
-        ConfigUtility.setProperty("email", email);
-        ConfigUtility.setProperty("password", password);
-    }
-
+    String firstName = RandomDataGenerator.getRandomFirstName();
+    String lastName = RandomDataGenerator.getRandomLastName();
+    String email = RandomDataGenerator.getRandomEmail(firstName, lastName);
+    String password = RandomDataGenerator.getRandomPassword();
+    String birthDate = RandomDataGenerator.getRandomBirthDate();
 
     @Test
     void clickOnSignInAndAccountTest() {
@@ -50,6 +32,12 @@ public class RegistrationTest extends BaseTest {
     void createAccountTest() {
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
+
+
+        ConfigUtility.setProperty("firstName", firstName);
+        ConfigUtility.setProperty("lastName", lastName);
+        ConfigUtility.setProperty("email", email);
+        ConfigUtility.setProperty("password", password);
 
         registrationPage.clickSignIn();
         registrationPage.clickCreateAccount();
@@ -98,6 +86,7 @@ public class RegistrationTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/invalid_last_name_values.csv", numLinesToSkip = 1)
     void registerWithInvalidLastName(String lastName) {
+
         LoginPage loginPage = new LoginPage(driver);
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
@@ -123,6 +112,7 @@ public class RegistrationTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/invalid password.csv", numLinesToSkip = 1)
     void registerUsingBadPassword(String password) {
+
         LoginPage loginPage = new LoginPage(driver);
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
@@ -147,6 +137,7 @@ public class RegistrationTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/invalid_email_values.csv", numLinesToSkip = 1)
     void registerWithInvalidEmail(String email) {
+
         LoginPage loginPage = new LoginPage(driver);
 
         RegistrationPage registrationPage = new RegistrationPage(driver);

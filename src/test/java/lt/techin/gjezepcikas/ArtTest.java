@@ -238,9 +238,8 @@ public class ArtTest extends BaseTest {
         assertEquals("Art", registrationPage.getTitle(), "Title not match");
 
         // Sort by Sales, Highest To Lowest
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSalesHighestToLowest);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSalesHighestToLowest);
 
         wait.until(ExpectedConditions.urlContains("order=product.sales.desc"));
 
@@ -268,9 +267,8 @@ public class ArtTest extends BaseTest {
 
 
         // Sort by Sales, Name A-Z
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSortByNameAz);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSortByNameAz);
 
 
         wait.until(ExpectedConditions.urlContains("product.name.asc"));
@@ -296,12 +294,9 @@ public class ArtTest extends BaseTest {
         artPage.clickArtPageButton();
 
         // Sort by Sales, Name Z-A
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSortByNameZa);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSortByNameZa);
 
-
-        //Assertions nesugalvoju...
         wait.until(ExpectedConditions.urlContains("product.name.desc"));
 
         String expectedUrlPart = "product.name.desc";
@@ -328,9 +323,8 @@ public class ArtTest extends BaseTest {
         assertEquals("Art", registrationPage.getTitle(), "Title not match");
 
         // Sort by Price, Low to High
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSortByPriceLowToHigh);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSortByPriceLowToHigh);
 
         wait.until(ExpectedConditions.urlContains("product.price.asc"));
 
@@ -358,9 +352,8 @@ public class ArtTest extends BaseTest {
         assertEquals("Art", registrationPage.getTitle(), "Title not match");
 
         // Sort by Price, High to Low
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSortByPriceHighToLow);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSortByPriceHighToLow);
 
         wait.until(ExpectedConditions.urlContains("product.price.desc"));
 
@@ -388,9 +381,8 @@ public class ArtTest extends BaseTest {
         assertEquals("Art", registrationPage.getTitle(), "Title not match");
 
         // Sort by Reference, A to Z
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSortByReferenceAtoZ);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSortByReferenceAtoZ);
 
         wait.until(ExpectedConditions.urlContains("product.reference.asc"));
 
@@ -419,14 +411,66 @@ public class ArtTest extends BaseTest {
 
 
         // Sort by Reference, ZtoA
-        ArtPage artSortByPage = new ArtPage(driver);
-        retryClick(artSortByPage::clickSortByButton);
-        retryClick(artSortByPage::clickSortByReferenceZtoA);
+        retryClick(artPage::clickSortByButton);
+        retryClick(artPage::clickSortByReferenceZtoA);
 
         wait.until(ExpectedConditions.urlContains("product.reference.desc"));
 
         String expectedUrlPart = "product.reference.desc";
         assertTrue(driver.getCurrentUrl().contains(expectedUrlPart), "URL does not reflect sorting by sales");
     }
+
+    //Wishlist
+    @Test
+    void addWishlistTest() {
+
+        // Login
+        String email = ConfigUtility.getProperty("email");
+        String password = ConfigUtility.getProperty("password");
+
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickSignIn();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.emailInput(email);
+        loginPage.passwordInput(password);
+        loginPage.clickLoginButton();
+
+        ArtPage artPage = new ArtPage(driver);
+        artPage.clickArtPageButton();
+
+        assertEquals("Art", registrationPage.getTitle(), "Title not match");
+
+        //Add to Wishlist
+        artPage.clickWishlistButton();
+        artPage.chooseChecklist();
+        assertEquals("Product added", artPage.successMessageWishlist(),
+                "Expected text not match with actual text !!!");
+    }
+
+    @Test
+    void removeFromWishlistTest() {
+
+        // Login
+        String email = ConfigUtility.getProperty("email");
+        String password = ConfigUtility.getProperty("password");
+
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickSignIn();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.emailInput(email);
+        loginPage.passwordInput(password);
+        loginPage.clickLoginButton();
+
+        ArtPage artPage = new ArtPage(driver);
+        artPage.clickArtPageButton();
+
+        assertEquals("Art", registrationPage.getTitle(), "Title not match");
+
+        //Remove from Wishlist
+        artPage.clickWishlistButton();
+        assertEquals("Product successfully removed", artPage.successMessageRemoveFromWishlist());
+
+    }
+
 
 }
