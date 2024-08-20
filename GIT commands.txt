@@ -1,0 +1,118 @@
+git add -> git commit -> git pull -> git push
+
+Windows Credentials - istrint nereiklingus login
+
+VIM EXIT - wq (write & Quit)
+git config --global core.editor "nano" - pakeisti file editor
+git status - parodo failus pridetus bet ne komitinti
+git status --short - trumpesnis variantas
+$ git log --name-status - neblogas variantas
+git log - Parodo visus commitus
+git log --oneline
+git log --pretty=oneline | nl - sunumeruota ir graziai atspausdina
+git checkout (branch code) - gali patikrint buvusius branchus
+git checkout master/main - gryzta i naujausia commit
+git rebase -i HEAD~3  - persokot i ta commit ir galima pervadint
+$ git rebase -i --root - leidzia rinktis ir pirma commit ir visus kitus
+rm index.html - pasalina faila
+git rm -rf --cached . - pasalina failus cashintus
+git commit --amend - naujausio commito zinutes pakeitimas
+git branch --help - gito pagalba
+.gitignore - surasom ko nenorim kad detu i repo (pats savaime sitas failas nera repo dalis)
+git add -A - prideda viska prie esamo repo
+git restore --staged text.txt - grazina is staged i initial busena
+
+
+
+======
+https://education.github.com/git-cheat-sheet-education.pdf
+https://cbea.ms/git-commit/
+https://visualizegit.com/
+======
+
+
+Step 3 – Connect your GitHub account to your Git account.
+You'll do this from your terminal.
+
+To set your Git username, type this in your terminal:
+
+git config --global core.editor "nano"
+
+git config --global user.name "Segun Ajibola"
+To confirm that you have set your Git username correctly, type this:
+
+git config --global user.name
+You should have "Segun Ajibola" as the output.
+
+To set your Git email, type this in your terminal:
+
+git config --global user.email "youremail@gmail.com"
+To confirm that you have set your Git email correctly, type this:
+
+git config --global user.email
+You should have "youremail@gmail.com" as the output.
+
+You will be asked to authenticate your GitHub account, so just sign in with the same email to confirm.
+
+========================================================================================================
+Settings -> SSH & GPG keys -> Add SSH
+ssh-keygen -t ed25519 -C "gintaras.jezepcikas@stud.techin.lt" - ssh rakto sukurimas terminale
+cat /c/Users/Vartotojas/.ssh/id_ed25519.pub
+
+git remote set-url origin git@github.com:username/repository.git
+git remote -v
+git push origin -u main
+
+
+========================================================================================================
+
+
+‌echo "# sample-code" >> README.md
+
+git init
+git add .
+git commit -m "First commit"
+git branch -M main
+git remote add origin https://github.com/techinSTUD/Gintaras_techin_all.git
+
+git push --set-upstream origin main
+
+git push -u origin main - pirma syki butina taip pushint jeigu per ssh ir naujas repo
+
+git remote -v - nutolusios sakos nuoroda
+
+
+git pull origin main
+git push --force origin main
+
+
+=========================================================================================================
+git status 
+git add . - prideda visus pakeitimus pries commitinant
+git commit -m "message"
+git push - i githuba
+
+master branch turetu but apsaugota nuo tiesioginio pushinimo
+
+git pull - patikrinam ar up to date 
+
+git checkout -b (branch name) - sukuria branch ir i ji persoka
+git switch -c bug-fix - sukuria nauja branch
+git merge bug-fix - branch sumetam i master/main
+git push origin bug-fix
+=============BRANCHES========================================================================================
+git branch name
+git switch name
+git branch -r - githubo branchai visi (ne lokalus, origin tai pasako)
+git branch - visos lokalios sakos
+git merge main - Iš savo šakos pereiname į main -> main padarome pull -> pereiname atgal į savo šaką -> savo šakoje padarome git merge main 
+git switch/checkout <name> - galima sokinet per branch
+git reset <file.name> - pasalina pasirinkta faila
+git stash - padeda i sona pasaugojimui kad galetum kitur persijungt
+git stash pop - susigrazinam stashinta faila
+git show-branch -a - graziai parodo kas kur ka dare
+git pull origin main - parsiuncia failus i branch is main
+git push -u origin gintaras --force - prastumia pull request kuris buvo conflict
+git branch <branch-name> --delete - istrina brancha
+----
+Settings -> Branches -> Add classic protection rules ->main branch -> *Require a pull request before merging
