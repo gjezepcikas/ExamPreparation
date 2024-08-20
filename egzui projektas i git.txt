@@ -1,0 +1,25 @@
+1. susikurti projekta pagal pavadinima
+
+2. susikurt repo
+
+3. 
+===================================================================================
+echo "# test5test" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/gjezepcikas/test5test.git
+git push -u origin main
+===================================================================================
+git remote add origin https://github.com/gjezepcikas/test5test.git
+git branch -M main
+git push -u origin main
+
+
+duombazes - 7
+Linux - 10
+tinklapiai - 10
+java - 7
+manual - 8
+automatinis - 8
